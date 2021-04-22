@@ -19,7 +19,7 @@ public class GetCryptoService {
     public HashMap<String,String> getCryptoCurrencyPrice() {
     	Map response = restTemplate.getForObject(CONST.CRYPTO_PRICE_URL.getConst(), Map.class);
     	List<Map<String,String>> cryptos = (List<Map<String, String>>) response.get(CONST.MAP_DATA_KEY.getConst());
-    	
+    	//test
     	List<String> cryptoList = Arrays.asList(
     			CONST.BTC.getConst(),
     			CONST.ETH.getConst(),
