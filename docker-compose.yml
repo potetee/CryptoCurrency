@@ -1,0 +1,20 @@
+version: "3.4"
+services:
+  spring:
+    build:
+      context: ./IntelliJ/CryptoCurrency
+      network: first-network
+      dockerfile: Dockerfile
+    container_name: my-spring-container
+  react:
+    build:
+      context: ./React/trade-currency
+      network: first-network
+      dockerfile: Dockerfile
+    container_name: my-react-container
+  curl:
+    image: curlimages/curl:7.78.0
+    networks:
+      - first-network
+networks:
+  first-network:
