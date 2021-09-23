@@ -13,10 +13,10 @@ public class SettingProperties {
 	//AWS DynamoDB setting
 	@Setter
 	@Getter
-	private String accessKeyId = "AKIA2DEUKKIEBM6NA6QC";
+	private String accessKeyId = "AKIA2DEUKKIEOW5EJBUQ";
 	@Setter
 	@Getter
-	private String secretAccessKey = "IWipqwg11cIJUeJa9qOGuNSGt075bi27SCCHS/62";
+	private String secretAccessKey = "Fasr1WGuqxdVI72CDB80mqCFYTO04tGtqmFACTG7";
 	@Setter
 	@Getter
 	private Region region = Region.US_EAST_2;

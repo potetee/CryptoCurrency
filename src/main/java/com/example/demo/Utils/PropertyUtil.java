@@ -16,7 +16,6 @@ public class PropertyUtil {
     	try {
 			properties.load(Files.newBufferedReader(Paths.get(INIT_FILE_PATH), StandardCharsets.UTF_8));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return properties.getProperty(key, defaultValue);

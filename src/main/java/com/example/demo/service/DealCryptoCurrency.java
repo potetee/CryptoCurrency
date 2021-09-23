@@ -94,7 +94,7 @@ public class DealCryptoCurrency {
     }
 
     private boolean checkAsset(Map<String, String> currentAssetMap, String askOrBid, String kind, String amount) {
-        boolean checkedResult = true;
+
 
         int selectedAssetAmount = Integer.parseInt(currentAssetMap.get(kind));
         int parsedAmount = Integer.parseInt(amount);
@@ -107,6 +107,7 @@ public class DealCryptoCurrency {
         }
 
         //judge capability of deal
+        boolean checkedResult = true;
         if(selectedAssetAmount < 0){
             checkedResult = false;
         }
@@ -135,8 +136,4 @@ public class DealCryptoCurrency {
 
         return resultMessageMap;
     }
-
-
-
-
 }

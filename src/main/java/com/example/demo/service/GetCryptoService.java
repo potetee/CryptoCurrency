@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.demo.controller.CryptoController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.Utils.CONST;
@@ -15,11 +19,18 @@ import com.example.demo.Utils.CONST;
 public class GetCryptoService {
     @Autowired
     RestTemplate restTemplate;
+
+	Logger logger = LoggerFactory.getLogger(GetCryptoService.class);
     
     public HashMap<String,String> getCryptoCurrencyPrice() {
-    	Map response = restTemplate.getForObject(CONST.CRYPTO_PRICE_URL.getConst(), Map.class);
+		Map response = new HashMap();
+    	try{
+			response = restTemplate.getForObject(CONST.CRYPTO_PRICE_URL.getConst(), Map.class);
+		}catch (RestClientException e){
+    		logger.warn("Error:When fetching data from GMO");
+		}
+
     	List<Map<String,String>> cryptos = (List<Map<String, String>>) response.get(CONST.MAP_DATA_KEY.getConst());
-    	//test
     	List<String> cryptoList = Arrays.asList(
     			CONST.BTC.getConst(),
     			CONST.ETH.getConst(),
@@ -34,6 +45,10 @@ public class GetCryptoService {
     			}
     		}
     	}
+		if(returnMap.size() == 0){
+			logger.warn("Error:the response does not have crypto info");
+		}
+
 		return returnMap;
     }
 }
