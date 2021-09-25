@@ -1,43 +1,30 @@
 package com.example.demo.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@AutoConfigureMockMvc
-@SpringBootTest
 class DealCryptoCurrencyTest {
 
+    @InjectMocks
     private DealCryptoCurrency dealCryptoCurrency;
+    @Mock
     private DynamoDBAccess dynamoDBAccess;
+    @Mock
     private GetCryptoService getCryptoService;
-
-    @BeforeEach
-    public void setUp(){
-        dynamoDBAccess = Mockito.mock(DynamoDBAccess.class);
-        getCryptoService = Mockito.mock(GetCryptoService.class);
-        dealCryptoCurrency = new DealCryptoCurrency(dynamoDBAccess,getCryptoService);
-    }
-
-
 
     @Test
     public void checkInputPath00() {
