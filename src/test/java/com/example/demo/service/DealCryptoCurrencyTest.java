@@ -1,13 +1,16 @@
 package com.example.demo.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -16,20 +19,23 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @SpringBootTest
 class DealCryptoCurrencyTest {
 
-    @Mock
-    GetCryptoService getCryptoService;
+    private DealCryptoCurrency dealCryptoCurrency;
+    private DynamoDBAccess dynamoDBAccess;
+    private GetCryptoService getCryptoService;
 
-    @InjectMocks
-    DealCryptoCurrency dealCryptoCurrency;
-
-    @Mock
-    DynamoDBAccess dynamoDBAccess;
+    @BeforeEach
+    public void setUp(){
+        dynamoDBAccess = Mockito.mock(DynamoDBAccess.class);
+        getCryptoService = Mockito.mock(GetCryptoService.class);
+        dealCryptoCurrency = new DealCryptoCurrency(dynamoDBAccess,getCryptoService);
+    }
 
 
 
@@ -244,10 +250,13 @@ class DealCryptoCurrencyTest {
 
     @Test
     public void checkCashTest00(){
-        doReturn(null).when(getCryptoService).getCryptoCurrencyPrice();
+        Map<String,String> priceMap = new HashMap<>();
+        priceMap.put("BTC","100");
+        doReturn(priceMap).when(getCryptoService).getCryptoCurrencyPrice();
         Map<String,String> currentAssetMap = new HashMap<>();
         currentAssetMap.put("BTC","1");
-        doReturn(currentAssetMap).when(dynamoDBAccess).getAsset();
+        currentAssetMap.put("investment-capability","1000");
+        when(dynamoDBAccess.getAsset()).thenReturn(currentAssetMap);
         dealCryptoCurrency.dealCurrency("ask","BTC","1");
 
     }

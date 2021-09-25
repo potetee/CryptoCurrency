@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 
 import com.example.demo.Utils.CONST;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,7 +13,7 @@ public class DealCryptoCurrency {
     private final DynamoDBAccess dynamoDBAccess;
     private final GetCryptoService getCryptoService;
 
-    DealCryptoCurrency(DynamoDBAccess dynamoDBAccess,GetCryptoService getCryptoService){
+    DealCryptoCurrency(@Autowired DynamoDBAccess dynamoDBAccess, @Autowired GetCryptoService getCryptoService){
         this.dynamoDBAccess = dynamoDBAccess;
         this.getCryptoService = getCryptoService;
     }
