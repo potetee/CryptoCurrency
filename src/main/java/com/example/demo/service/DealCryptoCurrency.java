@@ -13,7 +13,7 @@ public class DealCryptoCurrency {
     private final DynamoDBAccess dynamoDBAccess;
     private final GetCryptoService getCryptoService;
 
-    DealCryptoCurrency(@Autowired DynamoDBAccess dynamoDBAccess, @Autowired GetCryptoService getCryptoService){
+    DealCryptoCurrency(DynamoDBAccess dynamoDBAccess, GetCryptoService getCryptoService){
         this.dynamoDBAccess = dynamoDBAccess;
         this.getCryptoService = getCryptoService;
     }
