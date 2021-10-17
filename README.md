@@ -1,3 +1,4 @@
+![](https://github.com/potetee/CryptoCurrency/workflows/fist-try-github-action/badge.svg)
 This project is for me training Spring boot.
 
 The function is that this spring boot accept two type of http request.
